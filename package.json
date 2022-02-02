@@ -26,6 +26,7 @@
     "budo": "^11.6.4"
   },
   "dependencies": {
+    "bel": "^6.0.0",
     "csjs-inject": "^1.0.1"
   }
 }

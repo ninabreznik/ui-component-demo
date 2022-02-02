@@ -1,29 +1,32 @@
 const inputInteger = require('../src/input-integer')
+const bel = require('bel')
 const csjs = require('csjs-inject')
-const parser = document.createElement('div')
 
-function start (css) {
-  parser.innerHTML = `<div>
+function demo (css) {
+  const page = bel`<div class=${css.demo}>
     <h1>input integer demo :)</h1>
-    <div class=${css.container}></div>
+    <div class=${css.container}>
+      ${inputInteger()}
+      ${inputInteger()}
+      ${inputInteger()}
+    </div>
   </div>`
-  const page = parser.children[0]
-  const output = page.children[2]
-  const container = page.children[1]
-  const input1 = inputInteger()
-  const input2 = inputInteger()
-  container.appendChild(input1)
-  container.appendChild(input2)
-
-  document.body.appendChild(page)
+  return page
 }
 
-start(csjs`
+const css = csjs`
+  .demo {
+    margin: 20px;
+    padding: 20px;
+    border: 2px dashed green;
+  }
   .container {
     border: 1px solid green;
     display: flex;
     flex-direction: column;
     width: 50%;
   }
-`)
+`
+
+document.body.appendChild(demo(css))
 
